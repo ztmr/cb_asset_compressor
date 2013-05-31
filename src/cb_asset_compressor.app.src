@@ -1,0 +1,13 @@
+%% -*-erlang-*-
+{application, cb_asset_compressor,
+ [
+  {description, "ChicagoBoss asset minifier"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  %{mod, { cb_asset_compressor_app, []}},
+  {env, []}
+ ]}.

@@ -1,0 +1,47 @@
+%% -*-web-*-
+{
+%% INPUT
+<<"
+  <html>
+    <head>
+      <link href=\"custom01.css\" rel=\"stylesheet\" />
+      <!-- This is correct to fail: <link href=\"/custom02.css\" rel=\"stylesheet\" /> -->
+      <link href=\"/assets/custom03.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+      <script src=\"custom01.js\"></script>
+    </head>
+    <body>
+      <script src=\"custom02.js\" />
+      <script>
+        (function (x) {
+          console.log (\"HelloWorld: \"+x);
+        }) (\"from Erlang!\");
+      </script>
+    </body>
+  </html>
+">>,
+
+%% OUTPUT
+<<"<html><head><style type=\"text/css\">
+/* This is custom01.css */
+.custom01 {
+
+  margin-left: 10px;
+
+
+}
+
+</style><!-- This is correct to fail: <link href=\"/custom02.css\" rel=\"stylesheet\" /> --><style type=\"text/css\">
+/* This is custom03.css */
+.custom03 {
+
+  margin-left: 30px;
+
+
+}
+
+</style><script>
+var custom01=function(){console.log(\"Hello from custom01!\");}</script></head><body><script>
+var custom02=function(){console.log(\"Hello from custom02!\");}</script><script>
+(function(x){console.log(\"HelloWorld: \"+x);})(\"from Erlang!\");</script></body></html>">>
+}.
